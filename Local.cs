@@ -11,6 +11,7 @@ namespace BookingSystemGroup4
         public String Name { get; set; }
         public DateTime StartTime { get; set; }
         public TimeSpan Duration { get; set; }
+        public int Seats { get; set; } 
 
     }
 }
