@@ -8,6 +8,6 @@ namespace BookingSystemGroup4
 {
     internal interface IBookable
     {
-
+        void BookRoom(); 
     }
 }
