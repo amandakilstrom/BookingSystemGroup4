@@ -8,7 +8,9 @@ namespace BookingSystemGroup4
 {
     internal class Local
     {
-        public String Name { get; set; }    
+        public String Name { get; set; }
+        public DateTime StartTime { get; set; }
+        public TimeSpan Duration { get; set; }
 
     }
 }
