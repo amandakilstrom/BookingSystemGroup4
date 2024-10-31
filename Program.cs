@@ -2,6 +2,8 @@
 {
     internal class Program
     {
+        List<Local> locals = new List<Local>();
+
         static void Main(string[] args)
         {
             
