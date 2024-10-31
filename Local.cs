@@ -14,9 +14,41 @@ namespace BookingSystemGroup4
         public TimeSpan Duration { get; set; }
         public int Seats { get; set; }
 
-        public void BookRoom()
+        public Local()
         {
-            throw new NotImplementedException();
+
         }
+        public Local(string name, DateTime startTime, TimeSpan duration)
+        {
+            Name = name;
+            StartTime = startTime;
+            Duration = duration;
+            
+        }
+        public void BookRoom(string name, DateTime startTime, TimeSpan duration)
+        {
+            
+            foreach (var booking in Bookings) //loppar igenom alla befintliga bokningar
+            {
+                if (Booked(booking.StartTime, booking.Duration, startTime, duration)) //kollar om bokningen finns redan
+                {
+                    Console.WriteLine($"Bokningen den {startTime:dd MMM yyyy} kl. {startTime:HH:mm}, i {duration.Hours} h och {duration.Minutes} min, kan tyvärr inte genomföras eftersom tiden är upptagen."); //skriver ut fel medelande om man inte kan boka
+                    return;
+                }
+            }
+            Local newBooking = new Local(name, startTime, duration); //gör bookningen
+            Bookings.Add(newBooking); //lägger till den i listan
+            Console.WriteLine($"Bokningen gick lyckades! {startTime:dd MMM yyyy} kl. {startTime:HH:mm} till {startTime.Add(duration):HH:mm}."); //skriver ut meddelande om lyckas boka
+        }
+
+        private bool Booked(DateTime oldStartTime, TimeSpan oldDuration, DateTime newStartTime, TimeSpan newDuration)
+        {
+            DateTime oldEndTime = oldStartTime + oldDuration; //Bokad tid slut
+            DateTime newEndTime = newStartTime + newDuration; //new bokning tid slut
+
+            return newStartTime < oldEndTime && newEndTime > oldStartTime; //return om newStartTime startar före oldEndTime är slut och om newEndtime överlappar oldStartTime
+        }
+
+        
     }
 }
