@@ -6,5 +6,25 @@
         {
             
         }
+
+        public static void ShowAllBookings()
+        {
+
+        }
+
+        public static void UpdateBooking()
+        {
+
+        }
+
+        public static void RemoveBooking()
+        {
+
+        }
+
+        public static void SearchBooking()
+        {
+
+        }
     }
 }
