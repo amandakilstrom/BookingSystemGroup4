@@ -7,11 +7,35 @@
         static void Main(string[] args)
         {
 
-            
+            Classroom classroom = new Classroom { Name = "c1" };
+            Classroom classroom2 = new Classroom { Name = "c2" };
+            Classroom classroom3 = new Classroom { Name = "c3" };
+            Grouproom grouproom = new Grouproom { Name = "g1" };
+            Grouproom grouproom2 = new Grouproom { Name = "g2" };
+            Grouproom grouproom3 = new Grouproom { Name = "g3" };
+            locals.Add(classroom);
+            locals.Add(classroom2);
+            locals.Add(classroom3);
+            locals.Add(grouproom);
+            locals.Add(grouproom2);
+            locals.Add(grouproom3);
 
-            
+            BookRoom();
+
+            foreach (var item in grouproom.Bookings)
+            {
+                Console.WriteLine($"{item.Name} {item.StartTime} {item.Duration}");
+            }
+            foreach (var item in classroom.Bookings)
+            {
+                Console.WriteLine($"{item.Name} {item.StartTime} {item.Duration}");
+            }
+
+
+
         }
 
+        
         public static void ShowAllBookings()
         {
 
@@ -199,7 +223,7 @@
             Console.WriteLine("Press Enter to continue...\n");
             Console.ReadKey();
             
-        }
+        } //wait for key
         
     }
 }

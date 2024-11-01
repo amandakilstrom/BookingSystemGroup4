@@ -8,7 +8,7 @@ namespace BookingSystemGroup4
 {
     internal class Local : IBookable
     {
-        public static List<Local> Bookings { get; private set; } = new List<Local>();
+        public List<Local> Bookings { get; set; } = new List<Local>();
         public String Name { get; set; }
         public DateTime StartTime { get; set; }
         public TimeSpan Duration { get; set; }
