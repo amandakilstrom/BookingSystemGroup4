@@ -8,7 +8,7 @@ namespace BookingSystemGroup4
 {
     internal class Local : IBookable
     {
-        public List<Local> Bookings = new List<Local>();
+        public static List<Local> Bookings { get; private set; } = new List<Local>();
         public String Name { get; set; }
         public DateTime StartTime { get; set; }
         public TimeSpan Duration { get; set; }
@@ -25,7 +25,7 @@ namespace BookingSystemGroup4
             Duration = duration;
             
         }
-        public void BookRoom(string name, DateTime startTime, TimeSpan duration) //Testar att boka rummet 
+        public virtual void BookRoom(string name, DateTime startTime, TimeSpan duration) //Testar att boka rummet 
         {
             
             foreach (var booking in Bookings) //loppar igenom alla befintliga bokningar
@@ -38,7 +38,7 @@ namespace BookingSystemGroup4
             }
             Local newBooking = new Local(name, startTime, duration); //gör bookningen
             Bookings.Add(newBooking); //lägger till den i listan
-            Console.WriteLine($"Bokningen gick lyckades! {startTime:dd MMM yyyy} kl. {startTime:HH:mm} till {startTime.Add(duration):HH:mm}."); //skriver ut meddelande om lyckas boka
+            Console.WriteLine($"Bokningen lyckades! {startTime:dd MMM yyyy} kl. {startTime:HH:mm} till {startTime.Add(duration):HH:mm}."); //skriver ut meddelande om lyckas boka
         }
 
         private bool Booked(DateTime oldStartTime, TimeSpan oldDuration, DateTime newStartTime, TimeSpan newDuration) //kollar om tiden är upptagen
@@ -51,4 +51,5 @@ namespace BookingSystemGroup4
 
         
     }
+
 }

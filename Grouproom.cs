@@ -15,7 +15,7 @@ namespace BookingSystemGroup4
         {
 
         }
-        public void BookRoom(string name, DateTime startTime, TimeSpan duration)
+        public override void BookRoom(string name, DateTime startTime, TimeSpan duration)
         {
 
             base.BookRoom(name, startTime, duration); //kör base class metod

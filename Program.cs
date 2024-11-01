@@ -6,7 +6,36 @@
 
         static void Main(string[] args)
         {
-            
+            Grouproom grouproom1 = new Grouproom();
+            grouproom1.Name = "grouproom 1";
+            Grouproom grouproom2 = new Grouproom();
+            grouproom2.Name = "grouproom 2";
+            Classroom classroom1 = new Classroom();
+            Classroom classroom2 = new Classroom();
+            Classroom classroom3 = new Classroom();
+            classroom1.Name = "classroom 1";
+            classroom2.Name = "classroom 2";
+            classroom3.Name = "classroom 3";
+            locals.Add(grouproom1);
+            locals.Add(grouproom2);
+            locals.Add(classroom1);
+            locals.Add(classroom2);
+            locals.Add(classroom3);
+
+
+            BookRoom();
+
+            Console.WriteLine("llllllllllllllllllllll");
+            Console.WriteLine("Grouproom");
+            foreach (var bookings in Grouproom.Bookings)
+            {
+                Console.WriteLine(bookings.Name);
+            }
+            Console.WriteLine("Classroom");
+            foreach (var bookings in Classroom.Bookings)
+            {
+                Console.WriteLine(bookings.Name);
+            }
         }
 
         public static void ShowAllBookings()
@@ -39,7 +68,7 @@
                 Console.Clear();
                 Console.WriteLine("-- Make a new booking --\n");
 
-
+                Local selectedRoom = WhatRoomToBook();
                 string? name = GetValidName(); //ange namn
                 DateTime startTime = GetValidStartTime(name); //ange starttid
                 TimeSpan duration = GetValidDuration(name, startTime); //ange längd
@@ -49,11 +78,12 @@
                 Console.WriteLine($"Day: {startTime:D}");
                 Console.WriteLine($"Time: {startTime:t}-{startTime.Add(duration):t}");
 
-                if (ConfirmNewBooking(name, startTime, duration))
+                if (ConfirmNewBooking(name, startTime, duration, selectedRoom))
                 {
-                    booking.BookRoom(name, startTime, duration);
-                    Console.WriteLine("Booking successful!");
-                    Thread.Sleep(1000); 
+                    selectedRoom.BookRoom(name, startTime, duration);
+                    
+                    GobackPause();
+                    break;
                 }
                 else
                 {
@@ -67,18 +97,43 @@
                         Console.Clear();
                         Console.WriteLine("Booking cancelled.");
                         GobackPause();
+                        break;
 
                     }
-                    else if(ConfirmNewBooking(name, startTime, duration))
-                    {
-                        booking.BookRoom(name, startTime, duration);
-                        Console.WriteLine("Booking successful!");
-                        Thread.Sleep(1000);
-                        GobackPause();
-                    }
+                    
                 }
 
             }
+
+        }
+        private static Local WhatRoomToBook()
+        {
+            int i = 1;
+            foreach (var room in locals)
+            {
+                
+                Console.WriteLine($"{i} | {room.Name}");
+                i++;
+            }
+            Console.Write("\nWhich room would you like to book? (Enter room name): ");
+            string? whatRoomTobook = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(whatRoomTobook))
+            {
+                foreach (var room in locals)
+                {
+                    if (whatRoomTobook == room.Name)
+                    {
+                        return room;
+                    }
+                }
+                Console.WriteLine("Room not found. Please try again.");
+            }
+            else
+            {
+                Console.WriteLine("Room name cannot be empty. Please enter a valid room name.");
+            }
+
+            return WhatRoomToBook(); //om man skriver in fel
 
         }
         private static string GetValidName()
@@ -125,11 +180,11 @@
                 Console.WriteLine("Invalid duration format. Please use the format H:MM (e.g., 1:30 for one and a half hours).");
             }
         } //kollar om man skriver in tid rätt
-        private static bool ConfirmNewBooking(string name, DateTime startTime, TimeSpan duration)
+        private static bool ConfirmNewBooking(string name, DateTime startTime, TimeSpan duration, Local selectedroom)
         {
             while (true)
             {
-                Console.WriteLine($"Do you want to book {name} on {startTime:dd MMM yyyy} at {startTime:HH:mm} to {startTime.Add(duration):HH:mm}? (y/n)"); 
+                Console.WriteLine($"{name}. Do you want to book {selectedroom.Name} on {startTime:dd MMM yyyy} at {startTime:HH:mm} to {startTime.Add(duration):HH:mm}? (y/n)"); 
                 string? response = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(response)) //kollar om det y eller n
                 {
@@ -169,6 +224,8 @@
         {
             Console.WriteLine("Press Enter to continue...\n");
             Console.ReadKey();
+            
         }
+        
     }
 }
