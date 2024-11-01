@@ -20,15 +20,24 @@
             locals.Add(grouproom2);
             locals.Add(grouproom3);
 
-            BookRoom();
+            while (true)
+            {
+                BookRoom();
 
-            foreach (var item in grouproom.Bookings)
-            {
-                Console.WriteLine($"{item.Name} {item.StartTime} {item.Duration}");
-            }
-            foreach (var item in classroom.Bookings)
-            {
-                Console.WriteLine($"{item.Name} {item.StartTime} {item.Duration}");
+                foreach (var item in grouproom.Bookings)
+                {
+                    Console.WriteLine($"{item.Name} {item.StartTime} {item.Duration}");
+                }
+                Console.WriteLine("222222");
+                foreach (var item in grouproom2.Bookings)
+                {
+                    Console.WriteLine($"{item.Name} {item.StartTime} {item.Duration}");
+                }
+                foreach (var item in classroom.Bookings)
+                {
+                    Console.WriteLine($"{item.Name} {item.StartTime} {item.Duration}");
+                }
+                GobackPause();
             }
 
 
