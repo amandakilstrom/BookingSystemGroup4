@@ -6,10 +6,8 @@
 
         static void Main(string[] args)
         {
+
             
-
-
-            BookRoom();
 
             
         }
@@ -36,9 +34,8 @@
 
         public static void BookRoom()
         {
-            Local booking = new Local();
-            Classroom classroomBooking = new Classroom();
-            Grouproom grouproomBooking = new Grouproom();
+            
+            
             while (true)
             {
                 Console.Clear();
@@ -56,8 +53,8 @@
 
                 if (ConfirmNewBooking(name, startTime, duration, selectedRoom))
                 {
-                    selectedRoom.BookRoom(name, startTime, duration);
-                    
+                    selectedRoom.BookRoom(name, startTime, duration); //sätter in bokningen i selected room
+                    Console.WriteLine();
                     GobackPause();
                     break;
                 }
@@ -85,21 +82,22 @@
         private static Local WhatRoomToBook()
         {
             int i = 1;
-            foreach (var room in locals)
+            foreach (var room in locals) //loopar igenom alla rum i locals listan
             {
                 
-                Console.WriteLine($"{i} | {room.Name}");
+                Console.WriteLine($"{i} | {room.Name}"); //och skriver ut dem
                 i++;
             }
             Console.Write("\nWhich room would you like to book? (Enter room name): ");
             string? whatRoomTobook = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(whatRoomTobook))
+            if (!string.IsNullOrWhiteSpace(whatRoomTobook)) //om man skriver något
             {
-                foreach (var room in locals)
+                foreach (var room in locals) //loopar igeom alla rum i locals listan
                 {
-                    if (whatRoomTobook == room.Name)
+                    if (whatRoomTobook == room.Name) //om rummet finns
                     {
-                        return room;
+                        return room; //skicka till backa det rummet 
+                        
                     }
                 }
                 Console.WriteLine("Room not found. Please try again.");
@@ -111,7 +109,7 @@
 
             return WhatRoomToBook(); //om man skriver in fel
 
-        }
+        } //kollar vilket rum man vill boka
         private static string GetValidName()
         {
             while (true)
