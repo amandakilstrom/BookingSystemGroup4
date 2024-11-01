@@ -25,7 +25,7 @@ namespace BookingSystemGroup4
             Duration = duration;
             
         }
-        public void BookRoom(string name, DateTime startTime, TimeSpan duration)
+        public void BookRoom(string name, DateTime startTime, TimeSpan duration) //Testar att boka rummet 
         {
             
             foreach (var booking in Bookings) //loppar igenom alla befintliga bokningar
@@ -41,7 +41,7 @@ namespace BookingSystemGroup4
             Console.WriteLine($"Bokningen gick lyckades! {startTime:dd MMM yyyy} kl. {startTime:HH:mm} till {startTime.Add(duration):HH:mm}."); //skriver ut meddelande om lyckas boka
         }
 
-        private bool Booked(DateTime oldStartTime, TimeSpan oldDuration, DateTime newStartTime, TimeSpan newDuration)
+        private bool Booked(DateTime oldStartTime, TimeSpan oldDuration, DateTime newStartTime, TimeSpan newDuration) //kollar om tiden är upptagen
         {
             DateTime oldEndTime = oldStartTime + oldDuration; //Bokad tid slut
             DateTime newEndTime = newStartTime + newDuration; //new bokning tid slut
