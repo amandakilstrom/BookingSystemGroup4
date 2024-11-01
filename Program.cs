@@ -6,36 +6,12 @@
 
         static void Main(string[] args)
         {
-            Grouproom grouproom1 = new Grouproom();
-            grouproom1.Name = "grouproom 1";
-            Grouproom grouproom2 = new Grouproom();
-            grouproom2.Name = "grouproom 2";
-            Classroom classroom1 = new Classroom();
-            Classroom classroom2 = new Classroom();
-            Classroom classroom3 = new Classroom();
-            classroom1.Name = "classroom 1";
-            classroom2.Name = "classroom 2";
-            classroom3.Name = "classroom 3";
-            locals.Add(grouproom1);
-            locals.Add(grouproom2);
-            locals.Add(classroom1);
-            locals.Add(classroom2);
-            locals.Add(classroom3);
+            
 
 
             BookRoom();
 
-            Console.WriteLine("llllllllllllllllllllll");
-            Console.WriteLine("Grouproom");
-            foreach (var bookings in Grouproom.Bookings)
-            {
-                Console.WriteLine(bookings.Name);
-            }
-            Console.WriteLine("Classroom");
-            foreach (var bookings in Classroom.Bookings)
-            {
-                Console.WriteLine(bookings.Name);
-            }
+            
         }
 
         public static void ShowAllBookings()
