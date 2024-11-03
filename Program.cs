@@ -23,20 +23,15 @@
             while (true)
             {
                 BookRoom();
-
-                foreach (var item in grouproom.Bookings)
+                foreach (var item in locals)
                 {
-                    Console.WriteLine($"{item.Name} {item.StartTime} {item.Duration}");
+                    foreach (var books in item.Bookings)
+                    {
+                        Console.WriteLine($"{books.Name} {books.StartTime} {books.Duration}");
+                    }
                 }
-                Console.WriteLine("222222");
-                foreach (var item in grouproom2.Bookings)
-                {
-                    Console.WriteLine($"{item.Name} {item.StartTime} {item.Duration}");
-                }
-                foreach (var item in classroom.Bookings)
-                {
-                    Console.WriteLine($"{item.Name} {item.StartTime} {item.Duration}");
-                }
+                
+                
                 GobackPause();
             }
 
