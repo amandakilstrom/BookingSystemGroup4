@@ -196,7 +196,7 @@
         //}
         private static void GobackPause()
         {
-            Console.WriteLine("Press Enter to continue...\n");
+            Console.WriteLine("\nPress Enter to continue...");
             Console.ReadKey();
 
         } //wait for key
