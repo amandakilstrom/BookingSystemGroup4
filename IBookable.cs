@@ -8,6 +8,6 @@ namespace BookingSystemGroup4
 {
     internal interface IBookable
     {
-        void BookRoom(string name, DateTime startTime, TimeSpan duration); 
+        void BookRoom(string name, DateTime startTime, TimeSpan duration, string bookingName); 
     }
 }

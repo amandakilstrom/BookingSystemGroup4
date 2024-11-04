@@ -13,15 +13,11 @@ namespace BookingSystemGroup4
             Bookings = new List<Local>();
         }
         
-        public Grouproom(string name, DateTime startTime, TimeSpan duration)
-            : base(name, startTime, duration ) //får prop från base class
+        
+        public override void BookRoom(string name, DateTime startTime, TimeSpan duration, string bookingName)
         {
 
-        }
-        public override void BookRoom(string name, DateTime startTime, TimeSpan duration)
-        {
-
-            base.BookRoom(name, startTime, duration); //kör base class metod
+            base.BookRoom(name, startTime, duration, bookingName); //kör base class metod
             
         }
         

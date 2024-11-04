@@ -13,19 +13,21 @@ namespace BookingSystemGroup4
         public DateTime StartTime { get; set; }
         public TimeSpan Duration { get; set; }
         public int Seats { get; set; }
+        public String BookingName { get; set; }
 
         public Local()
         {
 
         }
-        public Local(string name, DateTime startTime, TimeSpan duration)
+        public Local(string roomName, DateTime startTime, TimeSpan duration, string bookingName)
         {
-            Name = name;
+            Name = roomName;
             StartTime = startTime;
             Duration = duration;
+            BookingName = bookingName;
             
         }
-        public virtual void BookRoom(string name, DateTime startTime, TimeSpan duration) //Testar att boka rummet 
+        public virtual void BookRoom(string name, DateTime startTime, TimeSpan duration, string bookingName) //Testar att boka rummet 
         {
             
             foreach (var booking in Bookings) //loppar igenom alla befintliga bokningar
@@ -36,7 +38,7 @@ namespace BookingSystemGroup4
                     return;
                 }
             }
-            Local newBooking = new Local(name, startTime, duration); //gör bookningen
+            Local newBooking = new Local(name, startTime, duration, bookingName); //gör bookningen
             Bookings.Add(newBooking); //lägger till den i listan
             Console.WriteLine($"Bokningen lyckades! {startTime:dd MMM yyyy} kl. {startTime:HH:mm} till {startTime.Add(duration):HH:mm}."); //skriver ut meddelande om lyckas boka
         }
