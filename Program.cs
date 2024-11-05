@@ -1,14 +1,21 @@
+
+﻿using System;
+using System.Xml.Linq;
+
 ﻿using Microsoft.VisualBasic;
+
 
 namespace BookingSystemGroup4
 {
     internal class Program
     {
+
         public static List<Local> locals = new List<Local>();
+
 
         static void Main(string[] args)
         {
-            
+            Program.ShowAllRooms();
         }
 
 
@@ -143,6 +150,28 @@ namespace BookingSystemGroup4
                 Console.WriteLine($"No bookings were found for the year {choiseYear}.");
             }
             GobackPause();
+        }
+
+
+        public static void ShowAllRooms()
+        {
+            locals.Add(new Local("Grupprum A", DateTime.Now, new TimeSpan(1, 0, 0), 6)); 
+            locals.Add(new Local("Grupprum B", DateTime.Now, new TimeSpan(2, 0, 0), 6));
+            locals.Add(new Local("Grupprum C", DateTime.Now, new TimeSpan(3, 0, 0), 6));
+            locals.Add(new Local("Sal A", DateTime.Now, new TimeSpan(1, 0, 0), 50));
+            locals.Add(new Local("Sal B", DateTime.Now, new TimeSpan(2, 0, 0), 50));
+            locals.Add(new Local("Sal C", DateTime.Now, new TimeSpan(3, 0, 0), 50));
+
+            foreach (var local in locals)
+            {
+                Console.WriteLine($"Namn: {room.Name}, Starttid: {room.StartTime}, Varaktighet: {room.Duration}, Platser: {room.Seats}");
+            }
+
+        }
+
+        public static void CheckRoomName()
+        {
+
         }
 
         public static void BookRoom()
@@ -311,6 +340,7 @@ namespace BookingSystemGroup4
             Console.ReadKey();
 
         } //wait for key
+
 
     }
 }

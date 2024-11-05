@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace BookingSystemGroup4
 {
-    internal class Local : IBookable
+    public class Local : IBookable
     {
 
+
         public List<Local> Bookings { get; set; } = new List<Local>();
+
         public String Name { get; set; }
         public DateTime StartTime { get; set; }
         public TimeSpan Duration { get; set; }
@@ -44,7 +46,20 @@ namespace BookingSystemGroup4
             Console.WriteLine($"Bokningen lyckades! {startTime:dd MMM yyyy} kl. {startTime:HH:mm} till {startTime.Add(duration):HH:mm}."); //skriver ut meddelande om lyckas boka
         }
 
+        public Local (String name, DateTime starttime, TimeSpan duration, int seats)
+        {
+            Name = name;
+            StartTime = starttime;
+            Duration = duration;
+            Seats = seats;
+        }
+
+
+
+        
+
         private bool Booked(DateTime oldStartTime, TimeSpan oldDuration, DateTime newStartTime, TimeSpan newDuration) //kollar om tiden är upptagen
+
         {
             DateTime oldEndTime = oldStartTime + oldDuration; //Bokad tid slut
             DateTime newEndTime = newStartTime + newDuration; //new bokning tid slut
