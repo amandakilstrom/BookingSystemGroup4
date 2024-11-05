@@ -15,7 +15,7 @@ namespace BookingSystemGroup4
 
         static void Main(string[] args)
         {
-            Program.ShowAllRooms();
+            
         }
 
 
@@ -164,7 +164,7 @@ namespace BookingSystemGroup4
 
             foreach (var local in locals)
             {
-                Console.WriteLine($"Namn: {room.Name}, Starttid: {room.StartTime}, Varaktighet: {room.Duration}, Platser: {room.Seats}");
+                Console.WriteLine($"Namn: {local.Name}, Starttid: {local.StartTime}, Varaktighet: {local.Duration}, Platser: {local.Seats}");
             }
 
         }
