@@ -30,6 +30,12 @@ namespace BookingSystemGroup4
             BookingName = bookingName;
             
         }
+
+        public Local(string name, int seats)
+        {
+            Name=name;
+            Seats=seats;
+        }
         public virtual void BookRoom(string name, DateTime startTime, TimeSpan duration, string bookingName) //Testar att boka rummet 
         {
             

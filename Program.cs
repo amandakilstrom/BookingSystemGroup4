@@ -341,6 +341,27 @@ namespace BookingSystemGroup4
 
         } //wait for key
 
+        public static void CreateRoom()
+        {
+            // Fråga användaren om namnet på salen och lagra det i variabeln 'roomName'
+            Console.Write("Enter the name of the room: ");
+            string roomName = Console.ReadLine();
 
+            // Fråga användaren om antalet platser i salen och kontrollera att inmatningen är giltig
+            Console.Write("Enter the number of seats for the room: ");
+            int seatCount;
+            while (!int.TryParse(Console.ReadLine(), out seatCount) || seatCount <= 0)
+            {
+                // Om inmatningen inte är ett positivt heltal, visa ett felmeddelande och be om en ny inmatning
+                Console.WriteLine("Please enter a valid, positive integer for the number of seats.");
+            }
+
+            // Skapa ett nytt 'Local'-objekt för salen med det angivna namnet och antalet platser
+            // och lägg till det nya rummet i listan 'rooms'
+            locals.Add(new Local(roomName, seatCount));
+
+            // Bekräfta för användaren att den nya salen har skapats med det angivna namnet och antalet platser
+            Console.WriteLine($"New room '{roomName}' has been created with {seatCount} seats.");
+        }
     }
 }
