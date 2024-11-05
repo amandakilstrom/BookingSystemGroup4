@@ -8,6 +8,13 @@
         {
 
             
+        }
+
+        // En metod som tar in en lista
+        public static void ShowAllBookings(List<Local> locals)
+
+
+            
 
 
 
@@ -15,8 +22,22 @@
 
 
         public static void ShowAllBookings()
-        {
 
+        {
+            // En foreach som går igenom alla objekt i Locals
+            foreach (Local local1 in locals)
+            {
+                // Skriver ut namnet på rummet
+                Console.WriteLine($"Room: {local1.Name}");
+                // Gör så att Bookings får tillgång till locals
+                Local.Bookings = locals;
+                // En foreach som går igenom alla objekt i Bookings
+                foreach (Local local in Local.Bookings)
+                {
+                    // Skriver ut datum och tid
+                    Console.WriteLine($"Start time: {local.StartTime}\tDuration: {local.Duration}");
+                }
+            }
         }
 
         public static void UpdateBooking()
