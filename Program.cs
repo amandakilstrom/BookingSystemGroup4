@@ -12,8 +12,6 @@ namespace BookingSystemGroup4
         }
 
 
-
-
         public static void ShowAllBookings()
 
         {
@@ -60,14 +58,15 @@ namespace BookingSystemGroup4
             // Går igenom alla lokaler i bokningar
             foreach (Local local in locals)
             {
-                foreach (var bookings in local.Bookings)
-                {
 
+                foreach (Local booking in local.Bookings)
+                {
                     // Om användarens sökning stämmer in på ett datum i listan
-                    if (userDateSearch == bookings.StartTime)
+                    if (userDateSearch == booking.StartTime)
                     {
                         Console.Write("Enter new date (yyyy-mm-dd): ");
                         DateTime.TryParse(Console.ReadLine(), out DateTime newDate);
+
 
                         Console.Write("Enter new duration time: ");
                         TimeSpan.TryParse(Console.ReadLine(), out TimeSpan newDuration);
@@ -76,14 +75,17 @@ namespace BookingSystemGroup4
                         String? bookingName = Console.ReadLine();
 
                         // Updaterar användarens bokning
-                        bookings.StartTime = newDate;
-                        bookings.Duration = newDuration;
-                        bookings.Name = bookingName;
+
+                        booking.StartTime = newDate;
+                        booking.Duration = newDuration;
+                        booking.Name = bookingName;
+
 
                         Console.WriteLine("Update is complete");
                         return;
                     }
                 }
+                
             }
             // Meddelar användaren att den sökta bokningen inte hittades
             Console.WriteLine("Booking was not found");
