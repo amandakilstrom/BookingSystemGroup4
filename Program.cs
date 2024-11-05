@@ -1,5 +1,6 @@
 
 ﻿using System;
+using System.Text.Json;
 using System.Xml.Linq;
 
 ﻿using Microsoft.VisualBasic;
@@ -11,11 +12,14 @@ namespace BookingSystemGroup4
     {
 
         public static List<Local> locals = new List<Local>();
-
+        
 
         static void Main(string[] args)
         {
-            
+            string Loadedlocals = File.ReadAllText("Locals.json");
+            locals = JsonSerializer.Deserialize<List<Local>>(Loadedlocals);
+
+
         }
 
 
