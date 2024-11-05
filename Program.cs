@@ -29,6 +29,7 @@ namespace BookingSystemGroup4
                 //gör en fil
                 string emptyJson = JsonSerializer.Serialize(locals);
                 File.WriteAllText(filePath, emptyJson);
+
             }
 
 
