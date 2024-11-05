@@ -13,17 +13,6 @@ namespace BookingSystemGroup4
         }
 
         // En metod som tar in en lista
-        public static void ShowAllBookings(List<Local> locals)
-        
-
-            
-
-
-
-
-        }
-
-
         public static void ShowAllBookings()
 
         {
@@ -69,28 +58,32 @@ namespace BookingSystemGroup4
             while (!validDateFormat);
             
             // Går igenom alla lokaler i bokningar
-            foreach (Local local in Local.Bookings)
+            foreach (Local local in locals)
             {
-                // Om användarens sökning stämmer in på ett datum i listan
-                if (userDateSearch == local.StartTime)
+                foreach (Local booking in local.Bookings)
                 {
-                    Console.Write("Enter new date (yyyy-mm-dd): ");
-                    DateTime.TryParse(Console.ReadLine(), out DateTime newDate);
+                    // Om användarens sökning stämmer in på ett datum i listan
+                    if (userDateSearch == booking.StartTime)
+                    {
+                        Console.Write("Enter new date (yyyy-mm-dd): ");
+                        DateTime.TryParse(Console.ReadLine(), out DateTime newDate);
 
-                    Console.Write("Enter new duration time: ");
-                    TimeSpan.TryParse(Console.ReadLine(), out TimeSpan newDuration);
+                        Console.Write("Enter new duration time: ");
+                        TimeSpan.TryParse(Console.ReadLine(), out TimeSpan newDuration);
 
-                    Console.Write("Enter booking name: ");
-                    String? bookingName = Console.ReadLine();
+                        Console.Write("Enter booking name: ");
+                        String? bookingName = Console.ReadLine();
 
-                    // Updaterar användarens bokning
-                    local.StartTime = newDate;
-                    local.Duration = newDuration;
-                    local.Name = bookingName;
+                        // Updaterar användarens bokning
+                        booking.StartTime = newDate;
+                        booking.Duration = newDuration;
+                        booking.Name = bookingName;
 
-                    Console.WriteLine("Update is complete");
-                    return;
+                        Console.WriteLine("Update is complete");
+                        return;
+                    }
                 }
+                
             }
             // Meddelar användaren att den sökta bokningen inte hittades
             Console.WriteLine("Booking was not found");
