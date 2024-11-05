@@ -8,28 +8,26 @@ namespace BookingSystemGroup4
 
         static void Main(string[] args)
         {
-
             
         }
 
-        // En metod som tar in en lista
+
         public static void ShowAllBookings()
 
         {
-            // En foreach som går igenom alla objekt i Locals
-            foreach (Local local1 in locals)
+
+            foreach (var local in locals)
             {
-                // Skriver ut namnet på rummet
-                Console.WriteLine($"Room: {local1.Name}");
-                // Gör så att Bookings får tillgång till locals
-                Local.Bookings = locals;
-                // En foreach som går igenom alla objekt i Bookings
-                foreach (Local local in Local.Bookings)
+                foreach (var booking in local.Bookings)
                 {
-                    // Skriver ut datum och tid
-                    Console.WriteLine($"Start time: {local.StartTime}\tDuration: {local.Duration}");
+                    Console.WriteLine($"Room: {booking.Name} booked by {booking.BookingName}. {booking.StartTime:D}, {booking.StartTime:t} - {booking.StartTime.Add(booking.Duration):t}");
+
+
                 }
             }
+            GobackPause();
+
+
         }
 
         public static void UpdateBooking()
@@ -56,10 +54,11 @@ namespace BookingSystemGroup4
                 }
             }
             while (!validDateFormat);
-            
+
             // Går igenom alla lokaler i bokningar
             foreach (Local local in locals)
             {
+
                 foreach (Local booking in local.Bookings)
                 {
                     // Om användarens sökning stämmer in på ett datum i listan
@@ -68,6 +67,7 @@ namespace BookingSystemGroup4
                         Console.Write("Enter new date (yyyy-mm-dd): ");
                         DateTime.TryParse(Console.ReadLine(), out DateTime newDate);
 
+
                         Console.Write("Enter new duration time: ");
                         TimeSpan.TryParse(Console.ReadLine(), out TimeSpan newDuration);
 
@@ -75,9 +75,11 @@ namespace BookingSystemGroup4
                         String? bookingName = Console.ReadLine();
 
                         // Updaterar användarens bokning
+
                         booking.StartTime = newDate;
                         booking.Duration = newDuration;
                         booking.Name = bookingName;
+
 
                         Console.WriteLine("Update is complete");
                         return;
@@ -94,17 +96,20 @@ namespace BookingSystemGroup4
             // Frågar användaren om bokningens datum
             Console.Write("Please enter the date of the booking you want to remove (yyyy-mm-dd): ");
             DateTime.TryParse(Console.ReadLine(), out DateTime searchDate);
-
-            // Går igenom alla bokningar i listan
-            for (int i = 0; i < Local.Bookings.Count; i++)
+            int i = 0;
+            foreach (Local local in locals)
             {
-                // Om en bokning matchar användarens sökning
-                if (Local.Bookings[i].StartTime == searchDate)
+                foreach (var bookings in local.Bookings)
                 {
-                    // Bokningen tas bort
-                    Local.Bookings.Remove(Local.Bookings[i]);
-                    // Går ur metoden
-                    return;
+                    // Om en bokning matchar användarens sökning
+                    if (bookings.Bookings[i].StartTime == searchDate)
+                    {
+                        // Bokningen tas bort
+                        bookings.Bookings.Remove(bookings.Bookings[i]);
+                        // Går ur metoden
+                        return;
+                    }
+                    i++;
                 }
             }
             // Ger ett meddelande till användaren om bokningen inte hittades
