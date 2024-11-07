@@ -1,5 +1,9 @@
 # BookingSystemGroup4
 
+# Begränsningar i programmet
+Om man inte skriver in en starttid kommer starttiden automatiskt vara från kl 00:00.
+
+
 ## ShowAllBookings Amanda/Johan
 En metod som har en foreach loop som går igenom alla lokaler först och
 sen i en ny foreach loop går igenom alla bokningar och skriver ut det åt användaren.
