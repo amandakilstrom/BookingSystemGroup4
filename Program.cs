@@ -124,12 +124,15 @@ namespace BookingSystemGroup4
             bool validDateFormat = false;
             DateTime userDateSearch;
 
+            Console.Write("Please enter the name of the room: ");
+            String searchRoomName = Console.ReadLine();
+
             // En do while loop som frågar användaren att skriva en ett datum
             // tills korrekt format av datum är inskrivet
             do
             {
                 Console.WriteLine("Which booking do you wish to update?");
-                Console.Write("Search booking by date (yyyy-mm-dd): ");
+                Console.Write("Search booking by date (yyyy-mm-dd HH:mm): ");
                 String? searchDate = Console.ReadLine();
 
                 if (DateTime.TryParse(searchDate, out userDateSearch))
@@ -151,7 +154,7 @@ namespace BookingSystemGroup4
                 foreach (Local booking in local.Bookings)
                 {
                     // Om användarens sökning stämmer in på ett datum i listan
-                    if (userDateSearch == booking.StartTime)
+                    if (userDateSearch == booking.StartTime && searchRoomName == local.Name)
                     {
                         Console.Write("Enter new date and start time (yyyy-mm-dd HH:mm): ");
                         DateTime.TryParse(Console.ReadLine(), out DateTime newDate);
@@ -188,12 +191,15 @@ namespace BookingSystemGroup4
             Console.Write("Please enter the date of the booking you want to remove (yyyy-mm-dd HH:mm): ");
             DateTime.TryParse(Console.ReadLine(), out DateTime searchDate);
 
+            Console.Write("Please enter the name of the room: ");
+            String searchRoomName = Console.ReadLine();
+
             foreach (Local local in locals)
             {
                 for (int i =0; i < local.Bookings.Count; i++)
                 {
                     // Om en bokning matchar användarens sökning
-                    if (local.Bookings[i].StartTime == searchDate)
+                    if (local.Bookings[i].StartTime == searchDate && searchRoomName == local.Name)
                     {
                         // Bokningen tas bort
                         local.Bookings.Remove(local.Bookings[i]);
