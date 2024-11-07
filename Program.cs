@@ -15,12 +15,12 @@ namespace BookingSystemGroup4
 
         static void Main(string[] args)
         {
-            string filePath = "Locals.json";
+            string filePath = "9549358_Locals.json";
 
             if (File.Exists(filePath))
             {
                 //om filen finns
-                string Loadedlocals = File.ReadAllText("Locals.json");
+                string Loadedlocals = File.ReadAllText("9549358_Locals.json");
                 locals = JsonSerializer.Deserialize<List<Local>>(Loadedlocals);
             }
             else
