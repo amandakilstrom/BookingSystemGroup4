@@ -15,6 +15,22 @@ namespace BookingSystemGroup4
 
         static void Main(string[] args)
         {
+            string filePath = "Locals.json";
+
+            if (File.Exists(filePath))
+            {
+                //om filen finns
+                string Loadedlocals = File.ReadAllText("Locals.json");
+                locals = JsonSerializer.Deserialize<List<Local>>(Loadedlocals);
+            }
+            else
+            {
+                //gör en fil
+                string emptyJson = JsonSerializer.Serialize(locals);
+                File.WriteAllText(filePath, emptyJson);
+
+            }
+
             locals.Add(new Local("Grupprum A", 6));
             locals.Add(new Local("Grupprum B", 6));
             locals.Add(new Local("Grupprum C", 6));
@@ -67,7 +83,7 @@ namespace BookingSystemGroup4
                         break;
 
                     case 7:
-                        //CreateRoom();
+                        CreateRoom();
                         break;
                     
                     case 8:
@@ -83,27 +99,7 @@ namespace BookingSystemGroup4
             }
             while (showMenu);
         }
-        static void Main(string[] args)
-        {
-            string filePath = "Locals.json";
-
-            if (File.Exists(filePath))
-            {
-                //om filen finns
-                string Loadedlocals = File.ReadAllText("Locals.json");
-                locals = JsonSerializer.Deserialize<List<Local>>(Loadedlocals);
-            }
-            else
-            {
-                //gör en fil
-                string emptyJson = JsonSerializer.Serialize(locals);
-                File.WriteAllText(filePath, emptyJson);
-
-            }
-
-
-        }
-
+        
 
         public static void ShowAllBookings()
 
