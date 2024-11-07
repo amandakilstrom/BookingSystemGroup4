@@ -171,7 +171,9 @@ namespace BookingSystemGroup4
                         booking.Duration = newDuration;
                         booking.Name = bookingName;
 
-
+                        // Updaterar filen
+                        string localsjson = JsonSerializer.Serialize(locals);
+                        File.WriteAllText("9549358_Locals.json", localsjson);
                         Console.WriteLine("Update is complete");
                         GobackPause();
                         return;
@@ -199,6 +201,9 @@ namespace BookingSystemGroup4
                     {
                         // Bokningen tas bort
                         local.Bookings.Remove(local.Bookings[i]);
+                        // Updaterar filen
+                        string localsjson = JsonSerializer.Serialize(locals);
+                        File.WriteAllText("9549358_Locals.json", localsjson);
                         // Går ur metoden
                         GobackPause();
                         return;
@@ -440,6 +445,7 @@ namespace BookingSystemGroup4
             // och lägg till det nya rummet i listan 'rooms'
             locals.Add(new Local(roomName, seatCount));
 
+            // Updaterar filen
             string localsjson = JsonSerializer.Serialize(locals);
             File.WriteAllText("9549358_Locals.json", localsjson);
 
