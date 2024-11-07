@@ -31,13 +31,11 @@ namespace BookingSystemGroup4
             BookingName = bookingName;
             
         }
-        public Local(string roomName, int seats)//Konstruktor som tillåter att metoden ShowAllRooms bara visar namn för rummet och antal platser
+
+        public Local(string name, int seats)
         {
-            Name = roomName;
-            Seats = seats;
-            StartTime = DateTime.Now;  //standardvärde
-            Duration = TimeSpan.FromHours(1);  //standardvärde
-            BookingName = "Default"; //standardvärde
+            Name=name;
+            Seats=seats;
         }
         public virtual void BookRoom(string name, DateTime startTime, TimeSpan duration, string bookingName) //Testar att boka rummet 
         {
