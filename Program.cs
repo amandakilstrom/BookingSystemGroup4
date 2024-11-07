@@ -12,10 +12,75 @@ namespace BookingSystemGroup4
 
         public static List<Local> locals = new List<Local>();
 
-
         static void Main(string[] args)
         {
-            
+            locals.Add(new Local("Grupprum A", 6));
+            locals.Add(new Local("Grupprum B", 6));
+            locals.Add(new Local("Grupprum C", 6));
+            locals.Add(new Local("Sal A", 50));
+            locals.Add(new Local("Sal B", 50));
+            locals.Add(new Local("Sal C", 50));
+
+            bool showMenu = true;
+            do
+            {
+
+                Console.WriteLine("Welcome to room booking");
+                Console.WriteLine("Choose an option:\n");
+                Console.WriteLine("1 - Show bookings");
+                Console.WriteLine("2 - Update booking");
+                Console.WriteLine("3 - Remove booking");
+                Console.WriteLine("4 - Search booking");
+                Console.WriteLine("5 - Show rooms");
+                Console.WriteLine("6 - Book room");
+                Console.WriteLine("7 - Create room");
+                Console.WriteLine("8 - Exit program\n");
+                Console.Write("Välj ett alternativ: ");
+
+                Int32.TryParse(Console.ReadLine(), out int choice);
+
+                switch (choice)
+                {
+                    case 1:
+                        ShowAllBookings();
+                        break;
+
+                    case 2:
+                        UpdateBooking();
+                        break;
+
+                    case 3:
+                        RemoveBooking();
+                        break;
+
+                    case 4:
+                        SearchBooking();
+                        break;
+
+                    case 5:
+                        ShowAllRooms();
+                        break;
+                    
+                    case 6:
+                        BookRoom();
+                        break;
+
+                    case 7:
+                        //CreateRoom();
+                        break;
+                    
+                    case 8:
+                        showMenu = false;
+                        break;
+
+                    default:
+                    Console.WriteLine("Incorrect input, try again.");
+                        break;
+                        
+
+                }
+            }
+            while (showMenu);
         }
 
 
@@ -155,23 +220,13 @@ namespace BookingSystemGroup4
 
         public static void ShowAllRooms()
         {
-            locals.Add(new Local("Grupprum A", DateTime.Now, new TimeSpan(1, 0, 0), 6)); 
-            locals.Add(new Local("Grupprum B", DateTime.Now, new TimeSpan(2, 0, 0), 6));
-            locals.Add(new Local("Grupprum C", DateTime.Now, new TimeSpan(3, 0, 0), 6));
-            locals.Add(new Local("Sal A", DateTime.Now, new TimeSpan(1, 0, 0), 50));
-            locals.Add(new Local("Sal B", DateTime.Now, new TimeSpan(2, 0, 0), 50));
-            locals.Add(new Local("Sal C", DateTime.Now, new TimeSpan(3, 0, 0), 50));
+           
 
             foreach (var local in locals)
             {
-                Console.WriteLine($"Namn: {local.Name}, Starttid: {local.StartTime}, Varaktighet: {local.Duration}, Platser: {local.Seats}");
+                Console.WriteLine($"Namn: {local.Name},Platser: {local.Seats}");
             }
-
-        }
-
-        public static void CheckRoomName()
-        {
-
+            GobackPause();
         }
 
         public static void BookRoom()

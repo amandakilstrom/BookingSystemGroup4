@@ -18,6 +18,7 @@ namespace BookingSystemGroup4
         public int Seats { get; set; }
         public String BookingName { get; set; }
 
+
         public Local()
         {
 
@@ -29,6 +30,14 @@ namespace BookingSystemGroup4
             Duration = duration;
             BookingName = bookingName;
             
+        }
+        public Local(string roomName, int seats)//Konstruktor som tillåter att metoden ShowAllRooms bara visar namn för rummet och antal platser
+        {
+            Name = roomName;
+            Seats = seats;
+            StartTime = DateTime.Now;  //standardvärde
+            Duration = TimeSpan.FromHours(1);  //standardvärde
+            BookingName = "Default"; //standardvärde
         }
         public virtual void BookRoom(string name, DateTime startTime, TimeSpan duration, string bookingName) //Testar att boka rummet 
         {
@@ -54,9 +63,6 @@ namespace BookingSystemGroup4
             Seats = seats;
         }
 
-
-
-        
 
         private bool Booked(DateTime oldStartTime, TimeSpan oldDuration, DateTime newStartTime, TimeSpan newDuration) //kollar om tiden är upptagen
 
