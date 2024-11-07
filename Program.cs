@@ -171,6 +171,7 @@ namespace BookingSystemGroup4
 
 
                         Console.WriteLine("Update is complete");
+                        GobackPause();
                         return;
                     }
                 }
@@ -178,6 +179,7 @@ namespace BookingSystemGroup4
             }
             // Meddelar användaren att den sökta bokningen inte hittades
             Console.WriteLine("Booking was not found");
+            GobackPause();
         }
 
         public static void RemoveBooking()
@@ -196,6 +198,7 @@ namespace BookingSystemGroup4
                         // Bokningen tas bort
                         bookings.Bookings.Remove(bookings.Bookings[i]);
                         // Går ur metoden
+                        GobackPause();
                         return;
                     }
                     i++;
@@ -203,6 +206,7 @@ namespace BookingSystemGroup4
             }
             // Ger ett meddelande till användaren om bokningen inte hittades
             Console.WriteLine("Your booking was not found");
+            GobackPause();
         }
 
         public static void SearchBooking()
@@ -385,31 +389,12 @@ namespace BookingSystemGroup4
                 }
                 Console.WriteLine("Please enter 'y' for yes or 'n' for no.");
             }
-        } //kollar om man vill göra sin bookning
-        //private static bool CancelNewBooking() //om man vill inte vill göra sin nya bokning
-        //{
-        //    while (true)
-        //    {
-        //        Console.WriteLine("Are you sure you want to cancel the booking? (y/n)");
-        //        string? yesOrno = Console.ReadLine();
-        //        if (!string.IsNullOrWhiteSpace(yesOrno)) //kollar om det är y eller n
-        //        {
-        //            if (yesOrno.ToLower() == "y" || yesOrno.ToLower() == "yes")
-        //            {
-        //                return true;
-        //            }
-        //            else if (yesOrno.ToLower() == "n" || yesOrno.ToLower() == "no")
-        //            {
-        //                return false;
-        //            }
-        //        }
-        //        Console.WriteLine("Please enter 'y' for yes or 'n' for no.");
-        //    }
-        //}
+        } 
         private static void GobackPause()
         {
             Console.WriteLine("\nPress Enter to continue...");
             Console.ReadKey();
+            Console.Clear();
 
         } //wait for key
 
@@ -434,6 +419,7 @@ namespace BookingSystemGroup4
 
             // Bekräfta för användaren att den nya salen har skapats med det angivna namnet och antalet platser
             Console.WriteLine($"New room '{roomName}' has been created with {seatCount} seats.");
+            GobackPause();
         }
     }
 }
