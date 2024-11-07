@@ -9,15 +9,16 @@ En metod som har en foreach loop som går igenom alla lokaler först och
 sen i en ny foreach loop går igenom alla bokningar och skriver ut det åt användaren.
 
 ## UpdateBooking Amanda
-En metod som ber användaren att söka efter bokning via datum. Det som användaren skriver in
-går igenom en if sats för att se om det var ett datum användaren skrev in. Det kommer att loopas tills 
-användaren faktiskt skriver in ett datum. 
+En metod som ber användaren att söka efter en bokning via datum och lokalens namn. Det som användaren 
+skriver in går igenom en if sats för att se om det var ett datum användaren skrev in. Det kommer att 
+loopas tills användaren faktiskt skriver in ett datum. 
 
 Efter är det två foreachloopar som går igenom listorna och där finns en if sats som stannar loopen om 
 sökningen finns i bokningslistan. Där får användaren ändra i sin bokning. Om sökningen inte hittade
 en bokning kommer ett meddelande till användaren om att bokningen inte hittades.
 
 ## RemoveBooking Amanda
-En metod som ber användaren om ett datum för en bokning som ska raderas. Det är två foreach loopar 
-som går igenom listorna och stannar när sökningen matchar en bokning. Där är det en if sats som raderar
-bokningen. Om sökningen inte hittades kommer användaren få ett meddelande om det.
+En metod som ber användaren om ett datum och lokalens namn för en bokning som ska raderas. 
+Det är det en foreach loop som går igenom alla lokaler och därefter är det en for loop som går
+igenom listan med alla bokningar. Därefter är det en if sats som raderar bokningen om en matcning 
+med datum och lokal hittades. Om sökningen inte hittades kommer användaren få ett meddelande om det.
