@@ -12,7 +12,6 @@ namespace BookingSystemGroup4
     {
 
         public static List<Local> locals = new List<Local>();
-        
 
         static void Main(string[] args)
         {
@@ -32,9 +31,75 @@ namespace BookingSystemGroup4
 
             }
 
+            locals.Add(new Local("Grupprum A", 6));
+            locals.Add(new Local("Grupprum B", 6));
+            locals.Add(new Local("Grupprum C", 6));
+            locals.Add(new Local("Sal A", 50));
+            locals.Add(new Local("Sal B", 50));
+            locals.Add(new Local("Sal C", 50));
 
+            bool showMenu = true;
+            do
+            {
+
+                Console.WriteLine("Welcome to room booking");
+                Console.WriteLine("Choose an option:\n");
+                Console.WriteLine("1 - Show bookings");
+                Console.WriteLine("2 - Update booking");
+                Console.WriteLine("3 - Remove booking");
+                Console.WriteLine("4 - Search booking");
+                Console.WriteLine("5 - Show rooms");
+                Console.WriteLine("6 - Book room");
+                Console.WriteLine("7 - Create room");
+                Console.WriteLine("8 - Exit program\n");
+                Console.Write("Välj ett alternativ: ");
+
+                Int32.TryParse(Console.ReadLine(), out int choice);
+
+                switch (choice)
+                {
+                    case 1:
+                        ShowAllBookings();
+                        break;
+
+                    case 2:
+                        UpdateBooking();
+                        break;
+
+                    case 3:
+                        RemoveBooking();
+                        break;
+
+                    case 4:
+                        SearchBooking();
+                        break;
+
+                    case 5:
+                        ShowAllRooms();
+                        break;
+                    
+                    case 6:
+                        BookRoom();
+                        break;
+
+                    case 7:
+                        CreateRoom();
+                        break;
+                    
+                    case 8:
+                        showMenu = false;
+                        break;
+
+                    default:
+                    Console.WriteLine("Incorrect input, try again.");
+                        break;
+                        
+
+                }
+            }
+            while (showMenu);
         }
-
+        
 
         public static void ShowAllBookings()
 
@@ -106,6 +171,7 @@ namespace BookingSystemGroup4
 
 
                         Console.WriteLine("Update is complete");
+                        GobackPause();
                         return;
                     }
                 }
@@ -113,6 +179,7 @@ namespace BookingSystemGroup4
             }
             // Meddelar användaren att den sökta bokningen inte hittades
             Console.WriteLine("Booking was not found");
+            GobackPause();
         }
 
         public static void RemoveBooking()
@@ -131,6 +198,7 @@ namespace BookingSystemGroup4
                         // Bokningen tas bort
                         bookings.Bookings.Remove(bookings.Bookings[i]);
                         // Går ur metoden
+                        GobackPause();
                         return;
                     }
                     i++;
@@ -138,6 +206,7 @@ namespace BookingSystemGroup4
             }
             // Ger ett meddelande till användaren om bokningen inte hittades
             Console.WriteLine("Your booking was not found");
+            GobackPause();
         }
 
         public static void SearchBooking()
@@ -172,23 +241,13 @@ namespace BookingSystemGroup4
 
         public static void ShowAllRooms()
         {
-            locals.Add(new Local("Grupprum A", DateTime.Now, new TimeSpan(1, 0, 0), 6)); 
-            locals.Add(new Local("Grupprum B", DateTime.Now, new TimeSpan(2, 0, 0), 6));
-            locals.Add(new Local("Grupprum C", DateTime.Now, new TimeSpan(3, 0, 0), 6));
-            locals.Add(new Local("Sal A", DateTime.Now, new TimeSpan(1, 0, 0), 50));
-            locals.Add(new Local("Sal B", DateTime.Now, new TimeSpan(2, 0, 0), 50));
-            locals.Add(new Local("Sal C", DateTime.Now, new TimeSpan(3, 0, 0), 50));
+           
 
             foreach (var local in locals)
             {
-                Console.WriteLine($"Namn: {local.Name}, Starttid: {local.StartTime}, Varaktighet: {local.Duration}, Platser: {local.Seats}");
+                Console.WriteLine($"Namn: {local.Name},Platser: {local.Seats}");
             }
-
-        }
-
-        public static void CheckRoomName()
-        {
-
+            GobackPause();
         }
 
         public static void BookRoom()
@@ -330,31 +389,12 @@ namespace BookingSystemGroup4
                 }
                 Console.WriteLine("Please enter 'y' for yes or 'n' for no.");
             }
-        } //kollar om man vill göra sin bookning
-        //private static bool CancelNewBooking() //om man vill inte vill göra sin nya bokning
-        //{
-        //    while (true)
-        //    {
-        //        Console.WriteLine("Are you sure you want to cancel the booking? (y/n)");
-        //        string? yesOrno = Console.ReadLine();
-        //        if (!string.IsNullOrWhiteSpace(yesOrno)) //kollar om det är y eller n
-        //        {
-        //            if (yesOrno.ToLower() == "y" || yesOrno.ToLower() == "yes")
-        //            {
-        //                return true;
-        //            }
-        //            else if (yesOrno.ToLower() == "n" || yesOrno.ToLower() == "no")
-        //            {
-        //                return false;
-        //            }
-        //        }
-        //        Console.WriteLine("Please enter 'y' for yes or 'n' for no.");
-        //    }
-        //}
+        } 
         private static void GobackPause()
         {
             Console.WriteLine("\nPress Enter to continue...");
             Console.ReadKey();
+            Console.Clear();
 
         } //wait for key
 
@@ -379,6 +419,7 @@ namespace BookingSystemGroup4
 
             // Bekräfta för användaren att den nya salen har skapats med det angivna namnet och antalet platser
             Console.WriteLine($"New room '{roomName}' has been created with {seatCount} seats.");
+            GobackPause();
         }
     }
 }

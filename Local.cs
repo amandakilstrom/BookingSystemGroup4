@@ -18,6 +18,7 @@ namespace BookingSystemGroup4
         public int Seats { get; set; }
         public String BookingName { get; set; }
 
+
         public Local()
         {
 
@@ -60,9 +61,6 @@ namespace BookingSystemGroup4
             Seats = seats;
         }
 
-
-
-        
 
         private bool Booked(DateTime oldStartTime, TimeSpan oldDuration, DateTime newStartTime, TimeSpan newDuration) //kollar om tiden är upptagen
 
