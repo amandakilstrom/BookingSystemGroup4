@@ -153,7 +153,7 @@ namespace BookingSystemGroup4
                     // Om användarens sökning stämmer in på ett datum i listan
                     if (userDateSearch == booking.StartTime)
                     {
-                        Console.Write("Enter new date (yyyy-mm-dd): ");
+                        Console.Write("Enter new date and start time (yyyy-mm-dd HH:mm): ");
                         DateTime.TryParse(Console.ReadLine(), out DateTime newDate);
 
 
@@ -185,23 +185,22 @@ namespace BookingSystemGroup4
         public static void RemoveBooking()
         {
             // Frågar användaren om bokningens datum
-            Console.Write("Please enter the date of the booking you want to remove (yyyy-mm-dd): ");
+            Console.Write("Please enter the date of the booking you want to remove (yyyy-mm-dd HH:mm): ");
             DateTime.TryParse(Console.ReadLine(), out DateTime searchDate);
-            int i = 0;
+
             foreach (Local local in locals)
             {
-                foreach (var bookings in local.Bookings)
+                for (int i =0; i < local.Bookings.Count; i++)
                 {
                     // Om en bokning matchar användarens sökning
-                    if (bookings.Bookings[i].StartTime == searchDate)
+                    if (local.Bookings[i].StartTime == searchDate)
                     {
                         // Bokningen tas bort
-                        bookings.Bookings.Remove(bookings.Bookings[i]);
+                        local.Bookings.Remove(local.Bookings[i]);
                         // Går ur metoden
                         GobackPause();
                         return;
                     }
-                    i++;
                 }
             }
             // Ger ett meddelande till användaren om bokningen inte hittades
