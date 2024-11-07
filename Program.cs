@@ -12,31 +12,33 @@ namespace BookingSystemGroup4
     {
 
         public static List<Local> locals = new List<Local>();
-
+        public static string filePath = "9549358_Locals.json";
         static void Main(string[] args)
         {
-            string filePath = "Locals.json";
+            
 
             if (File.Exists(filePath))
             {
                 //om filen finns
-                string Loadedlocals = File.ReadAllText("Locals.json");
+                string Loadedlocals = File.ReadAllText("9549358_Locals.json");
                 locals = JsonSerializer.Deserialize<List<Local>>(Loadedlocals);
             }
             else
             {
                 //gör en fil
+                
+                locals.Add(new Local("Grupprum A", 6));
+                locals.Add(new Local("Grupprum B", 6));
+                locals.Add(new Local("Grupprum C", 6));
+                locals.Add(new Local("Sal A", 50));
+                locals.Add(new Local("Sal B", 50));
+                locals.Add(new Local("Sal C", 50));
                 string emptyJson = JsonSerializer.Serialize(locals);
                 File.WriteAllText(filePath, emptyJson);
 
             }
 
-            locals.Add(new Local("Grupprum A", 6));
-            locals.Add(new Local("Grupprum B", 6));
-            locals.Add(new Local("Grupprum C", 6));
-            locals.Add(new Local("Sal A", 50));
-            locals.Add(new Local("Sal B", 50));
-            locals.Add(new Local("Sal C", 50));
+            
 
             bool showMenu = true;
             do
@@ -274,6 +276,8 @@ namespace BookingSystemGroup4
                 {
                     selectedRoom.BookRoom(roomName, startTime, duration, bookingName); //sätter in bokningen i selected room
                     Console.WriteLine();
+                    string localsjson = JsonSerializer.Serialize(locals);
+                    File.WriteAllText("9549358_Locals.json", localsjson);
                     GobackPause();
                     break;
                 }
@@ -399,10 +403,30 @@ namespace BookingSystemGroup4
 
         public static void CreateRoom()
         {
-            // Fråga användaren om namnet på salen och lagra det i variabeln 'roomName'
-            Console.Write("Enter the name of the room: ");
-            string roomName = Console.ReadLine();
-
+            string roomName = "";
+            bool a = true;
+            while (a) 
+            {
+                bool intehittatsal = true;
+                // Fråga användaren om namnet på salen och lagra det i variabeln 'roomName'
+                Console.Write("Enter the name of the room: ");
+                roomName = Console.ReadLine();
+                foreach (var item in locals)
+                {
+                    if (item.Name == roomName)
+                    {
+                        Console.WriteLine("Finns redan");
+                        intehittatsal = false;
+                        break;
+                    }
+                    
+                    
+                    
+                }
+                if (intehittatsal) { a = false; }
+                
+                
+            }
             // Fråga användaren om antalet platser i salen och kontrollera att inmatningen är giltig
             Console.Write("Enter the number of seats for the room: ");
             int seatCount;
@@ -416,9 +440,13 @@ namespace BookingSystemGroup4
             // och lägg till det nya rummet i listan 'rooms'
             locals.Add(new Local(roomName, seatCount));
 
+            string localsjson = JsonSerializer.Serialize(locals);
+            File.WriteAllText("9549358_Locals.json", localsjson);
+
             // Bekräfta för användaren att den nya salen har skapats med det angivna namnet och antalet platser
             Console.WriteLine($"New room '{roomName}' has been created with {seatCount} seats.");
             GobackPause();
+
         }
     }
 }
