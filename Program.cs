@@ -12,31 +12,33 @@ namespace BookingSystemGroup4
     {
 
         public static List<Local> locals = new List<Local>();
-
+        public static string filePath = "9549358_Locals.json";
         static void Main(string[] args)
         {
-            string filePath = "Locals.json";
+            
 
             if (File.Exists(filePath))
             {
                 //om filen finns
-                string Loadedlocals = File.ReadAllText("Locals.json");
+                string Loadedlocals = File.ReadAllText("9549358_Locals.json");
                 locals = JsonSerializer.Deserialize<List<Local>>(Loadedlocals);
             }
             else
             {
                 //gör en fil
+                
+                locals.Add(new Local("Grupprum A", 6));
+                locals.Add(new Local("Grupprum B", 6));
+                locals.Add(new Local("Grupprum C", 6));
+                locals.Add(new Local("Sal A", 50));
+                locals.Add(new Local("Sal B", 50));
+                locals.Add(new Local("Sal C", 50));
                 string emptyJson = JsonSerializer.Serialize(locals);
                 File.WriteAllText(filePath, emptyJson);
 
             }
 
-            locals.Add(new Local("Grupprum A", 6));
-            locals.Add(new Local("Grupprum B", 6));
-            locals.Add(new Local("Grupprum C", 6));
-            locals.Add(new Local("Sal A", 50));
-            locals.Add(new Local("Sal B", 50));
-            locals.Add(new Local("Sal C", 50));
+            
 
             bool showMenu = true;
             do
@@ -124,12 +126,15 @@ namespace BookingSystemGroup4
             bool validDateFormat = false;
             DateTime userDateSearch;
 
+            Console.Write("Please enter the name of the room: ");
+            String searchRoomName = Console.ReadLine();
+
             // En do while loop som frågar användaren att skriva en ett datum
             // tills korrekt format av datum är inskrivet
             do
             {
                 Console.WriteLine("Which booking do you wish to update?");
-                Console.Write("Search booking by date (yyyy-mm-dd): ");
+                Console.Write("Search booking by date (yyyy-mm-dd HH:mm): ");
                 String? searchDate = Console.ReadLine();
 
                 if (DateTime.TryParse(searchDate, out userDateSearch))
@@ -151,9 +156,9 @@ namespace BookingSystemGroup4
                 foreach (Local booking in local.Bookings)
                 {
                     // Om användarens sökning stämmer in på ett datum i listan
-                    if (userDateSearch == booking.StartTime)
+                    if (userDateSearch == booking.StartTime && searchRoomName == local.Name)
                     {
-                        Console.Write("Enter new date (yyyy-mm-dd): ");
+                        Console.Write("Enter new date and start time (yyyy-mm-dd HH:mm): ");
                         DateTime.TryParse(Console.ReadLine(), out DateTime newDate);
 
 
@@ -169,7 +174,9 @@ namespace BookingSystemGroup4
                         booking.Duration = newDuration;
                         booking.Name = bookingName;
 
-
+                        // Updaterar filen
+                        string localsjson = JsonSerializer.Serialize(locals);
+                        File.WriteAllText("9549358_Locals.json", localsjson);
                         Console.WriteLine("Update is complete");
                         GobackPause();
                         return;
@@ -185,23 +192,28 @@ namespace BookingSystemGroup4
         public static void RemoveBooking()
         {
             // Frågar användaren om bokningens datum
-            Console.Write("Please enter the date of the booking you want to remove (yyyy-mm-dd): ");
+            Console.Write("Please enter the date of the booking you want to remove (yyyy-mm-dd HH:mm): ");
             DateTime.TryParse(Console.ReadLine(), out DateTime searchDate);
-            int i = 0;
+
+            Console.Write("Please enter the name of the room: ");
+            String searchRoomName = Console.ReadLine();
+
             foreach (Local local in locals)
             {
-                foreach (var bookings in local.Bookings)
+                for (int i =0; i < local.Bookings.Count; i++)
                 {
                     // Om en bokning matchar användarens sökning
-                    if (bookings.Bookings[i].StartTime == searchDate)
+                    if (local.Bookings[i].StartTime == searchDate && searchRoomName == local.Name)
                     {
                         // Bokningen tas bort
-                        bookings.Bookings.Remove(bookings.Bookings[i]);
+                        local.Bookings.Remove(local.Bookings[i]);
+                        // Updaterar filen
+                        string localsjson = JsonSerializer.Serialize(locals);
+                        File.WriteAllText("9549358_Locals.json", localsjson);
                         // Går ur metoden
                         GobackPause();
                         return;
                     }
-                    i++;
                 }
             }
             // Ger ett meddelande till användaren om bokningen inte hittades
@@ -275,6 +287,8 @@ namespace BookingSystemGroup4
                 {
                     selectedRoom.BookRoom(roomName, startTime, duration, bookingName); //sätter in bokningen i selected room
                     Console.WriteLine();
+                    string localsjson = JsonSerializer.Serialize(locals);
+                    File.WriteAllText("9549358_Locals.json", localsjson);
                     GobackPause();
                     break;
                 }
@@ -400,10 +414,30 @@ namespace BookingSystemGroup4
 
         public static void CreateRoom()
         {
-            // Fråga användaren om namnet på salen och lagra det i variabeln 'roomName'
-            Console.Write("Enter the name of the room: ");
-            string roomName = Console.ReadLine();
-
+            string roomName = "";
+            bool a = true;
+            while (a) 
+            {
+                bool intehittatsal = true;
+                // Fråga användaren om namnet på salen och lagra det i variabeln 'roomName'
+                Console.Write("Enter the name of the room: ");
+                roomName = Console.ReadLine();
+                foreach (var item in locals)
+                {
+                    if (item.Name == roomName)
+                    {
+                        Console.WriteLine("Finns redan");
+                        intehittatsal = false;
+                        break;
+                    }
+                    
+                    
+                    
+                }
+                if (intehittatsal) { a = false; }
+                
+                
+            }
             // Fråga användaren om antalet platser i salen och kontrollera att inmatningen är giltig
             Console.Write("Enter the number of seats for the room: ");
             int seatCount;
@@ -417,9 +451,14 @@ namespace BookingSystemGroup4
             // och lägg till det nya rummet i listan 'rooms'
             locals.Add(new Local(roomName, seatCount));
 
+            // Updaterar filen
+            string localsjson = JsonSerializer.Serialize(locals);
+            File.WriteAllText("9549358_Locals.json", localsjson);
+
             // Bekräfta för användaren att den nya salen har skapats med det angivna namnet och antalet platser
             Console.WriteLine($"New room '{roomName}' has been created with {seatCount} seats.");
             GobackPause();
+
         }
     }
 }

@@ -40,3 +40,27 @@ Kod som finns i metoden CreateRoom som går igenom listan med lokaler för att kon
 
 
 >>>>>>> Stashed changes
+# BookingSystemGroup4
+
+# Begränsningar i programmet
+Om man inte skriver in en starttid kommer starttiden automatiskt vara från kl 00:00.
+
+
+## ShowAllBookings Amanda/Johan
+En metod som har en foreach loop som går igenom alla lokaler först och
+sen i en ny foreach loop går igenom alla bokningar och skriver ut det åt användaren.
+
+## UpdateBooking Amanda
+En metod som ber användaren att söka efter en bokning via datum och lokalens namn. Det som användaren 
+skriver in går igenom en if sats för att se om det var ett datum användaren skrev in. Det kommer att 
+loopas tills användaren faktiskt skriver in ett datum. 
+
+Efter är det två foreachloopar som går igenom listorna och där finns en if sats som stannar loopen om 
+sökningen finns i bokningslistan. Där får användaren ändra i sin bokning. Om sökningen inte hittade
+en bokning kommer ett meddelande till användaren om att bokningen inte hittades.
+
+## RemoveBooking Amanda
+En metod som ber användaren om ett datum och lokalens namn för en bokning som ska raderas. 
+Det är det en foreach loop som går igenom alla lokaler och därefter är det en for loop som går
+igenom listan med alla bokningar. Därefter är det en if sats som raderar bokningen om en matcning 
+med datum och lokal hittades. Om sökningen inte hittades kommer användaren få ett meddelande om det.
