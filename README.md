@@ -1,4 +1,6 @@
 # BookingSystemGroup4
+<<<<<<< Updated upstream
+=======
 
 # Begränsningar i programmet
 Om man inte skriver in en starttid kommer starttiden automatiskt vara från kl 00:00.
@@ -22,8 +24,19 @@ En metod som ber användaren om ett datum för en bokning som ska raderas. Det är 
 som går igenom listorna och stannar när sökningen matchar en bokning. Där är det en if sats som raderar
 bokningen. Om sökningen inte hittades kommer användaren få ett meddelande om det.
 
+## ShowAllRooms Emiliano/Amanda/Johan
+Metod som returnerar namn och antal platser för alla salar
+
+## CreateRoom Emma/Emiliano
+Metoden skapar ett nytt rum. Användare tilldelar det nya rummet ett namn och antal sittplatser. Bara dessa två egenskaper får
+tilldelas, egenskaperna bokningstid och bokningslängd följer per automatik med varje rum. 
+
+## Förhindra att salar har samma namn Emiliano Johan
+Kod som finns i metoden CreateRoom som går igenom listan med lokaler för att kontrollera att två rum inte har samma namn.
+
+## Meny Emiliano/Amanda
 
 
 
 
-
+>>>>>>> Stashed changes
