@@ -13,21 +13,13 @@ namespace BookingSystemGroup4
         
 
         public String Name { get; set; }
-        public DateTime StartTime { get; set; }
-        public TimeSpan Duration { get; set; }
+        
         public int Seats { get; set; }
-        public String BookingName { get; set; }
+        
         public List<Booking> Bookings { get; set; } = new List<Booking>();
         public Local() { }
         
-        public Local(string roomName, DateTime startTime, TimeSpan duration, string bookingName)
-        {
-            Name = roomName;
-            StartTime = startTime;
-            Duration = duration;
-            BookingName = bookingName;
-            
-        }
+        
 
         public Local(string name, int seats)
         {
