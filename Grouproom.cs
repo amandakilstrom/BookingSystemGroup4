@@ -12,7 +12,7 @@ namespace BookingSystemGroup4
         public Grouproom(string name, int seats)
             :base(name, seats) 
         {
-            
+            RoomType = "Grouproom";
             Name = name;
             Seats = seats;
             

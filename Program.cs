@@ -449,7 +449,16 @@ namespace BookingSystemGroup4
 
             // Skapa ett nytt 'Local'-objekt för salen med det angivna namnet och antalet platser
             // och lägg till det nya rummet i listan 'rooms'
-            locals.Add(new Local(roomName, seatCount));
+            if (seatCount <= 6)
+            {
+                locals.Add(new Grouproom(roomName, seatCount));
+            }
+            else
+            {
+                locals.Add(new Classroom(roomName, seatCount));
+            }
+            
+            
 
             // Updaterar filen
             string localsjson = JsonSerializer.Serialize(locals);

@@ -15,6 +15,7 @@ namespace BookingSystemGroup4
         public String Name { get; set; }
         
         public int Seats { get; set; }
+        public string RoomType { get; set; }
         
         public List<Booking> Bookings { get; set; } = new List<Booking>();
         public Local() { }
@@ -25,6 +26,7 @@ namespace BookingSystemGroup4
         {
             Name=name;
             Seats=seats;
+            
         }
         public virtual void BookRoom(string name, DateTime startTime, TimeSpan duration, string bookingName) //Testar att boka rummet 
         {
