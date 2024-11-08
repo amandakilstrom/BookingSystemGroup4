@@ -27,12 +27,12 @@ namespace BookingSystemGroup4
             {
                 //gör en fil
                 
-                locals.Add(new Local("Grupprum A", 6));
-                locals.Add(new Local("Grupprum B", 6));
-                locals.Add(new Local("Grupprum C", 6));
-                locals.Add(new Local("Sal A", 50));
-                locals.Add(new Local("Sal B", 50));
-                locals.Add(new Local("Sal C", 50));
+                locals.Add(new Grouproom("Grupprum A", 6));
+                locals.Add(new Grouproom("Grupprum B", 6));
+                locals.Add(new Grouproom("Grupprum C", 6));
+                locals.Add(new Classroom("Sal A", 50));
+                locals.Add(new Classroom("Sal B", 50));
+                locals.Add(new Classroom("Sal C", 50));
                 string emptyJson = JsonSerializer.Serialize(locals);
                 File.WriteAllText(filePath, emptyJson);
 
@@ -111,7 +111,7 @@ namespace BookingSystemGroup4
             {
                 foreach (var booking in local.Bookings)
                 {
-                    Console.WriteLine($"Room: {booking.Name} booked by {booking.BookingName}. {booking.StartTime:D}, {booking.StartTime:t} - {booking.StartTime.Add(booking.Duration):t}");
+                    Console.WriteLine($"Room: {local.Name} booked by {booking.BookingName}. {booking.StartTime:D}, {booking.StartTime:t} - {booking.StartTime.Add(booking.Duration):t}");
 
 
                 }
@@ -150,10 +150,10 @@ namespace BookingSystemGroup4
             while (!validDateFormat);
 
             // Går igenom alla lokaler i bokningar
-            foreach (Local local in locals)
+            foreach (var local in locals)
             {
 
-                foreach (Local booking in local.Bookings)
+                foreach (var booking in local.Bookings)
                 {
                     // Om användarens sökning stämmer in på ett datum i listan
                     if (userDateSearch == booking.StartTime && searchRoomName == local.Name)
@@ -172,7 +172,7 @@ namespace BookingSystemGroup4
 
                         booking.StartTime = newDate;
                         booking.Duration = newDuration;
-                        booking.Name = bookingName;
+                        booking.BookingName = bookingName;
 
                         // Updaterar filen
                         string localsjson = JsonSerializer.Serialize(locals);
@@ -234,7 +234,7 @@ namespace BookingSystemGroup4
                     if (bookings.StartTime.Year == choiseYear)
                     {
                         yearHasBookings = true;
-                        Console.WriteLine($"Room: {bookings.Name}, Boked by {bookings.BookingName} ");
+                        Console.WriteLine($"Room: {local.Name}, Boked by {bookings.BookingName} ");
                         Console.WriteLine($"{bookings.StartTime:Y} {bookings.StartTime:t} - {bookings.StartTime.Add(bookings.Duration):t}");
                         Console.WriteLine();
 

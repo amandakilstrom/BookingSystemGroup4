@@ -10,19 +10,16 @@ namespace BookingSystemGroup4
     {
 
 
-        public List<Local> Bookings { get; set; } = new List<Local>();
+        
 
         public String Name { get; set; }
         public DateTime StartTime { get; set; }
         public TimeSpan Duration { get; set; }
         public int Seats { get; set; }
         public String BookingName { get; set; }
-
-
-        public Local()
-        {
-
-        }
+        public List<Booking> Bookings { get; set; } = new List<Booking>();
+        public Local() { }
+        
         public Local(string roomName, DateTime startTime, TimeSpan duration, string bookingName)
         {
             Name = roomName;
@@ -48,18 +45,12 @@ namespace BookingSystemGroup4
                     return;
                 }
             }
-            Local newBooking = new Local(name, startTime, duration, bookingName); //gör bookningen
-            Bookings.Add(newBooking); //lägger till den i listan
+             //gör bookningen
+            Bookings.Add(new Booking(bookingName, startTime, duration)); //lägger till den i listan
             Console.WriteLine($"Bokningen lyckades! {startTime:dd MMM yyyy} kl. {startTime:HH:mm} till {startTime.Add(duration):HH:mm}."); //skriver ut meddelande om lyckas boka
         }
 
-        public Local (String name, DateTime starttime, TimeSpan duration, int seats)
-        {
-            Name = name;
-            StartTime = starttime;
-            Duration = duration;
-            Seats = seats;
-        }
+        
 
 
         private bool Booked(DateTime oldStartTime, TimeSpan oldDuration, DateTime newStartTime, TimeSpan newDuration) //kollar om tiden är upptagen

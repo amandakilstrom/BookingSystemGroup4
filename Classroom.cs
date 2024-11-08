@@ -11,10 +11,14 @@ namespace BookingSystemGroup4
     {
         public Classroom()
         {
-            Bookings = new List<Local>();
+            
+        }
+        public Classroom(string name, int seats)
+        {
+            Name = name;
+            Seats = seats;
         }
 
-        
         public override void BookRoom(string name, DateTime startTime, TimeSpan duration, string bookingName)
         {
 
