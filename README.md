@@ -1,4 +1,18 @@
 # BookingSystemGroup4
+För att starta programmet klicka på BookingSystemGroup4.exe. Exe- filen ligger i BookingSystemGroup4/bin/Debug/net.8.0.
+När programmet startas hälsas användaren välkommen och blir ombedd om att välja ett menyval. Det finns 8 menyval varav 
+menyval 8 avslutar programmet. Användaren får skriva in en siffra mellan 1 - 8.
+
+Menyval 1 - Visar alla befintliga bokningar.
+Menyval 2 - Updatera en befintlig bokning.
+Menyval 3 - Radera en bokning.
+MenyVal 4 - Sök efter en bokning.
+Menyval 5 - Visa alla rum.
+Menyval 6 - Boka ett rum.
+Menyval 7 - Skapa ett nytt rum.
+Menyval 8 - Avsluta programmet.
+
+Programmet ska användas till hantering av bokningar för klassrum och grupprum.
 
 # Begränsningar i programmet
 Om man inte skriver in en starttid kommer starttiden automatiskt vara från kl 00:00.
