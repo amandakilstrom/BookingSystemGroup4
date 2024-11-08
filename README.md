@@ -22,6 +22,14 @@ En metod som ber användaren om ett datum för en bokning som ska raderas. Det är 
 som går igenom listorna och stannar när sökningen matchar en bokning. Där är det en if sats som raderar
 bokningen. Om sökningen inte hittades kommer användaren få ett meddelande om det.
 
+## SearchBooking Johan
+Metod som ber användaren att mata in ett år som ska visa alla bokingar under de året. Det användaren skriver in
+går först igenom en if sats för att se om användar har skrivit ett giltigt format. Sen är det två foreach loppar den första 
+för att gå i igenom alla locals/rum och den andra för att gå igeom alla bokningar i varje locals/rum. Så är det en if sats 
+som kollar om det finns någon bokning under det året och om det är det så skriver den ut infomation om bokningen.
+Om det inte finns någon bokning eller användaren skriver in fel så meddelas användaren.
+
+
 ## ShowAllRooms Emiliano/Amanda/Johan
 Metod som returnerar namn och antal platser för alla salar
 

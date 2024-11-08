@@ -224,30 +224,43 @@ namespace BookingSystemGroup4
         public static void SearchBooking()
         {
             bool yearHasBookings = false;
-            Console.WriteLine("What year of bookings do you wanna see?");
-            int choiseYear = int.Parse(Console.ReadLine());
-            foreach (var local in locals)
+            bool keepgoing = true;
+            while (keepgoing)
             {
-                foreach (var bookings in local.Bookings)
+                Console.WriteLine("What year of bookings do you wanna see?");
+                string? stringchoiseYear = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(stringchoiseYear) && int.TryParse(stringchoiseYear, out int choiseYear))
                 {
-
-                    if (bookings.StartTime.Year == choiseYear)
+                    keepgoing = false;
+                    foreach (var local in locals)
                     {
-                        yearHasBookings = true;
-                        Console.WriteLine($"Room: {local.Name}, Boked by {bookings.BookingName} ");
-                        Console.WriteLine($"{bookings.StartTime:Y} {bookings.StartTime:t} - {bookings.StartTime.Add(bookings.Duration):t}");
-                        Console.WriteLine();
+                        foreach (var bookings in local.Bookings)
+                        {
 
+                            if (bookings.StartTime.Year == choiseYear)
+                            {
+                                yearHasBookings = true;
+                                Console.WriteLine($"Room: {local.Name}, Boked by {bookings.BookingName} ");
+                                Console.WriteLine($"{bookings.StartTime:Y} {bookings.StartTime:t} - {bookings.StartTime.Add(bookings.Duration):t}");
+                                Console.WriteLine();
+
+                            }
+
+
+                        }
                     }
-
-
+                    if (!yearHasBookings)
+                    {
+                        Console.WriteLine($"No bookings were found for the year {choiseYear}.");
+                    }
+                    GobackPause();
                 }
+                else
+                {
+                    Console.WriteLine("Invalid year format. Please use format yyyy (e.g., 2024)");
+                }
+
             }
-            if (!yearHasBookings)
-            {
-                Console.WriteLine($"No bookings were found for the year {choiseYear}.");
-            }
-            GobackPause();
         }
 
 
