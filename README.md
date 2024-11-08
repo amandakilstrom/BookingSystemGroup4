@@ -33,6 +33,15 @@ Om det inte finns någon bokning eller användaren skriver in fel så meddelas anvä
 ## ShowAllRooms Emiliano/Amanda/Johan
 Metod som returnerar namn och antal platser för alla salar
 
+## BookRoom Johan
+En metod som gör en bokning. Först så frågas användaren vilket rum man vill boka, om det rummet finns så går man vidare
+till Vems namn bokningen ska vara i, om man skriver in ett namn så går man vidare. Vilken start datum och tid man vill boka
+om man skriver in ett giltigt datum och tid så går man vidare. Användaren frågar om hur länge man vill boka, om man skriver in
+en giltig tid så går man vidare. Nu frågas användaren om man vill göra bokningen om ja(y) "så kollas om bokningen inte överlappar
+med någon annan bokning" om bokningen inte överlappar så görs bokningen och lägger in den i listan, annars så kastas bokningen och
+användaren får börja om.
+Om användaren skriver något fel eller inget så meddelas användaren och får testa igen.
+
 ## CreateRoom Emma/Emiliano
 Metoden skapar ett nytt rum. Användare tilldelar det nya rummet ett namn och antal sittplatser. Bara dessa två egenskaper får
 tilldelas, egenskaperna bokningstid och bokningslängd följer per automatik med varje rum. 
