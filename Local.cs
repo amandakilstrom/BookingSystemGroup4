@@ -35,13 +35,13 @@ namespace BookingSystemGroup4
             {
                 if (Booked(booking.StartTime, booking.Duration, startTime, duration)) //kollar om bokningen finns redan
                 {
-                    Console.WriteLine($"Bokningen den {startTime:dd MMM yyyy} kl. {startTime:HH:mm}, i {duration.Hours} h och {duration.Minutes} min, kan tyvärr inte genomföras eftersom tiden är upptagen."); //skriver ut fel medelande om man inte kan boka
+                    Console.WriteLine($"Unfortunately, the booking on {startTime:dd MMM yyyy} at {startTime:HH:mm}, for {duration.Hours} h and {duration.Minutes} min, cannot be completed because the time is already booked."); //skriver ut fel medelande om man inte kan boka
                     return;
                 }
             }
              //gör bookningen
             Bookings.Add(new Booking(bookingName, startTime, duration)); //lägger till den i listan
-            Console.WriteLine($"Bokningen lyckades! {startTime:dd MMM yyyy} kl. {startTime:HH:mm} till {startTime.Add(duration):HH:mm}."); //skriver ut meddelande om lyckas boka
+            Console.WriteLine($"The booking was successful! {startTime:dd MMM yyyy} at {startTime:HH:mm} to {startTime.Add(duration):HH:mm}."); //skriver ut meddelande om lyckas boka
         }
 
         
