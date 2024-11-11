@@ -429,7 +429,7 @@ namespace BookingSystemGroup4
                 {
                     if (item.Name == roomName)
                     {
-                        Console.WriteLine("Finns redan");
+                        Console.WriteLine("Already exists");
                         intehittatsal = false;
                         break;
                     }
