@@ -93,7 +93,8 @@ namespace BookingSystemGroup4
                         break;
 
                     default:
-                    Console.WriteLine("Incorrect input, try again.");
+                        Console.WriteLine("Incorrect input, try again.");
+                        GobackPause();
                         break;
                         
 
