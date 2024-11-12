@@ -425,6 +425,15 @@ namespace BookingSystemGroup4
                 // Fråga användaren om namnet på salen och lagra det i variabeln 'roomName'
                 Console.Write("Enter the name of the room: ");
                 roomName = Console.ReadLine();
+                
+                // Om användaren skriver in mindre än 3 karaktärer
+                if (roomName.Length < 3)
+                {
+                    Console.WriteLine("The room needs to have atleast 3 characters in name");
+                    GobackPause();
+                    return;
+                }
+
                 foreach (var item in locals)
                 {
                     if (item.Name == roomName)
