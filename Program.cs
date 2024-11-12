@@ -54,7 +54,7 @@ namespace BookingSystemGroup4
                 Console.WriteLine("6 - Book room");
                 Console.WriteLine("7 - Create room");
                 Console.WriteLine("8 - Exit program\n");
-                Console.Write("Välj ett alternativ: ");
+                Console.Write("Select an option: ");
 
                 Int32.TryParse(Console.ReadLine(), out int choice);
 
@@ -94,6 +94,9 @@ namespace BookingSystemGroup4
 
                     default:
                         Console.WriteLine("Incorrect input, try again.");
+
+                        GobackPause();
+
                         break;
 
 
@@ -104,21 +107,15 @@ namespace BookingSystemGroup4
 
 
         public static void ShowAllBookings()
-
         {
-
             foreach (var local in locals)
             {
                 foreach (var booking in local.Bookings)
                 {
                     Console.WriteLine($"Room: {local.Name} booked by {booking.BookingName}. {booking.StartTime:D}, {booking.StartTime:t} - {booking.StartTime.Add(booking.Duration):t}");
-
-
                 }
             }
             GobackPause();
-
-
         }
 
         public static void UpdateBooking()
@@ -267,18 +264,15 @@ namespace BookingSystemGroup4
         public static void ShowAllRooms()
         {
 
-
             foreach (var local in locals)
             {
-                Console.WriteLine($"Namn: {local.Name},Platser: {local.Seats}");
+                Console.WriteLine($"Name: {local.Name},Seats: {local.Seats}");
             }
             GobackPause();
         }
 
         public static void BookRoom()
         {
-
-
             while (true)
             {
                 Console.Clear();
@@ -446,20 +440,26 @@ namespace BookingSystemGroup4
                 // Fråga användaren om namnet på salen och lagra det i variabeln 'roomName'
                 Console.Write("Enter the name of the room: ");
                 roomName = Console.ReadLine();
+                
+                // Om användaren skriver in mindre än 3 karaktärer
+                if (roomName.Length < 3)
+                {
+                    Console.WriteLine("The room needs to have atleast 3 characters in name");
+                    GobackPause();
+                    return;
+                }
+
                 foreach (var item in locals)
                 {
                     if (item.Name == roomName)
                     {
-                        Console.WriteLine("Finns redan");
+                        Console.WriteLine("Already exists");
                         intehittatsal = false;
                         break;
                     }
 
-
-
                 }
                 if (intehittatsal) { a = false; }
-
 
             }
             // Fråga användaren om antalet platser i salen och kontrollera att inmatningen är giltig
