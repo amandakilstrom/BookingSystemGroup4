@@ -1,9 +1,9 @@
 
-﻿using System;
+using System;
 using System.Text.Json;
 using System.Xml.Linq;
 
-﻿using Microsoft.VisualBasic;
+using Microsoft.VisualBasic;
 
 
 namespace BookingSystemGroup4
@@ -15,7 +15,7 @@ namespace BookingSystemGroup4
         public static string filePath = "9549358_Locals.json";
         static void Main(string[] args)
         {
-            
+
 
             if (File.Exists(filePath))
             {
@@ -26,7 +26,7 @@ namespace BookingSystemGroup4
             else
             {
                 //gör en fil
-                
+
                 locals.Add(new Grouproom("Grupprum A", 6));
                 locals.Add(new Grouproom("Grupprum B", 6));
                 locals.Add(new Grouproom("Grupprum C", 6));
@@ -38,7 +38,7 @@ namespace BookingSystemGroup4
 
             }
 
-            
+
 
             bool showMenu = true;
             do
@@ -79,7 +79,7 @@ namespace BookingSystemGroup4
                     case 5:
                         ShowAllRooms();
                         break;
-                    
+
                     case 6:
                         BookRoom();
                         break;
@@ -87,21 +87,21 @@ namespace BookingSystemGroup4
                     case 7:
                         CreateRoom();
                         break;
-                    
+
                     case 8:
                         showMenu = false;
                         break;
 
                     default:
-                    Console.WriteLine("Incorrect input, try again.");
+                        Console.WriteLine("Incorrect input, try again.");
                         break;
-                        
+
 
                 }
             }
             while (showMenu);
         }
-        
+
 
         public static void ShowAllBookings()
 
@@ -182,7 +182,7 @@ namespace BookingSystemGroup4
                         return;
                     }
                 }
-                
+
             }
             // Meddelar användaren att den sökta bokningen inte hittades
             Console.WriteLine("Booking was not found");
@@ -200,7 +200,7 @@ namespace BookingSystemGroup4
 
             foreach (Local local in locals)
             {
-                for (int i =0; i < local.Bookings.Count; i++)
+                for (int i = 0; i < local.Bookings.Count; i++)
                 {
                     // Om en bokning matchar användarens sökning
                     if (local.Bookings[i].StartTime == searchDate && searchRoomName == local.Name)
@@ -266,7 +266,7 @@ namespace BookingSystemGroup4
 
         public static void ShowAllRooms()
         {
-           
+
 
             foreach (var local in locals)
             {
@@ -288,6 +288,7 @@ namespace BookingSystemGroup4
                 string roomName = selectedRoom.Name;
                 string? bookingName = GetValidName(); //ange namn
                 DateTime startTime = GetValidStartTime(bookingName); //ange starttid
+
                 TimeSpan duration = GetValidDuration(bookingName, startTime); //ange längd
 
 
@@ -376,7 +377,17 @@ namespace BookingSystemGroup4
                 string? startTimeInput = Console.ReadLine();
                 if (!string.IsNullOrWhiteSpace(startTimeInput) && DateTime.TryParse(startTimeInput, out DateTime startTime)) //kollar om det är rätt format
                 {
+                    if (startTime < DateTime.Now)
+                    {
+                        
+                        Console.WriteLine("Invalid date and time format. Please book in the future");
+                        GobackPause();
+                        GetValidStartTime(bookingName);
+                    }
                     return startTime;
+
+
+
                 }
                 Console.WriteLine("Invalid date and time format. Please use the format yyyy-MM-dd HH:mm.");
             }
@@ -416,7 +427,7 @@ namespace BookingSystemGroup4
                 }
                 Console.WriteLine("Please enter 'y' for yes or 'n' for no.");
             }
-        } 
+        }
         private static void GobackPause()
         {
             Console.WriteLine("\nPress Enter to continue...");
@@ -429,7 +440,7 @@ namespace BookingSystemGroup4
         {
             string roomName = "";
             bool a = true;
-            while (a) 
+            while (a)
             {
                 bool intehittatsal = true;
                 // Fråga användaren om namnet på salen och lagra det i variabeln 'roomName'
@@ -443,13 +454,13 @@ namespace BookingSystemGroup4
                         intehittatsal = false;
                         break;
                     }
-                    
-                    
-                    
+
+
+
                 }
                 if (intehittatsal) { a = false; }
-                
-                
+
+
             }
             // Fråga användaren om antalet platser i salen och kontrollera att inmatningen är giltig
             Console.Write("Enter the number of seats for the room: ");
@@ -470,8 +481,8 @@ namespace BookingSystemGroup4
             {
                 locals.Add(new Classroom(roomName, seatCount));
             }
-            
-            
+
+
 
             // Updaterar filen
             string localsjson = JsonSerializer.Serialize(locals);
